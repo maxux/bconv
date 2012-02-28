@@ -5,7 +5,7 @@
 
 char *btable = "0123456789ABCDEF";
 
-char * decimal_to_base(int base, int value, char *buffer) {
+char * decimal_to_base(int base, long long value, char *buffer) {
 	int len, j;
 	double i;
 	
@@ -64,7 +64,7 @@ void print_usage(char *basename) {
 
 int main(int argc, char *argv[]) {
 	char type, buffer[128];
-	int value = 0;
+	long long value = 0;
 	
 	/* Checking arguments */
 	if(argc < 2) {
@@ -98,7 +98,7 @@ int main(int argc, char *argv[]) {
 			
 			default:
 				type = BASE_DECIMAL;
-				value = atoi(argv[2]);
+				value = atoll(argv[2]);
 		}
 	} else {
 		/* Hexadecimal with 0x prefix */
@@ -109,7 +109,7 @@ int main(int argc, char *argv[]) {
 		/* Decimal */
 		} else {
 			type = BASE_DECIMAL;
-			value = atoi(argv[1]);
+			value = atoll(argv[1]);
 		}
 	}
 	
@@ -118,7 +118,7 @@ int main(int argc, char *argv[]) {
 	
 	printf("Binary  : %s\n", decimal_to_base(BASE_BINARY, value, buffer));
 	printf("Octal   : %s\n", decimal_to_base(BASE_OCTAL, value, buffer));
-	printf("Decimal : %d\n", value);
+	printf("Decimal : %lld\n", value);
 	printf("Hexa    : %s (0x%s)\n", decimal_to_base(BASE_HEXA, value, buffer), buffer);
 	
 	return 0;
